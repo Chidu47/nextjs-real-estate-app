@@ -110,16 +110,23 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params: { id } }) => {
-
    try {
       const data = await fetchApi(`${baseUrl}/properties/detail?externalID=${id}`)
+      console.log("datasssss", typeof data);
+      if (typeof data === 'string') {
+         return {
+            notFound: true,
+         };
+      }
       return {
          props: {
             propertyDetails: data,
          },
       };
    } catch (error) {
-      return error
+      return {
+         notFound: true,
+      };
 
    }
 };
