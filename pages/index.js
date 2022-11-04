@@ -21,8 +21,6 @@ const Banner = ({ purpose, title1, title2, desc1, desc2, buttonText, linkName, i
 )
 
 export default function Home({ propertiesForSale, propertiesForRent }) {
-  console.log(propertiesForSale);
-
   return (
     <Box>
       <Banner
@@ -55,28 +53,15 @@ export default function Home({ propertiesForSale, propertiesForRent }) {
   )
 }
 
-// export async function getServerSideProps() {
-//   const propertyForSale = await fetchApi(`${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-sale&hitsPerPage=6`)
-//   const propertyForRent = await fetchApi(`${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-rent&hitsPerPage=6`)
-
-//   return {
-//     props: {
-//       propertiesForSale: propertyForSale?.hits,
-//       propertiesForRent: propertyForRent?.hits,
-//     }
-//   }
-// }
-export async function getStaticProps() {
-  const { data, errors } = await fetchApi(`${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-sale&hitsPerPage=6`)
+export async function getServerSideProps() {
+  const propertyForSale = await fetchApi(`${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-sale&hitsPerPage=6`)
   const propertyForRent = await fetchApi(`${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-rent&hitsPerPage=6`)
-  // const propertyForSale = await fetchApi(`${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-sale&hitsPerPage=6`)
-  // const propertyForRent = await fetchApi(`${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-rent&hitsPerPage=6`)
+
   return {
     props: {
-      propertiesForSale: data?.hits,
-      propertiesForRent: propertyForRent?.data?.hits,
-      // propertiesForSale: propertyForSale?.hits,
-      // propertiesForRent: propertyForRent?.hits,
+      propertiesForSale: propertyForSale?.hits,
+      propertiesForRent: propertyForRent?.hits,
     }
   }
 }
+

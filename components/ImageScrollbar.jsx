@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import Image from 'next/image';
 import { Box, Icon, Flex } from '@chakra-ui/react';
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
@@ -14,7 +14,6 @@ const LeftArrow = () => {
                 onClick={() => scrollPrev()}
                 fontSize="2xl"
                 cursor="pointer"
-
             />
         </Flex>
     )
@@ -35,7 +34,7 @@ const RightArrow = () => {
 }
 
 const ImageScrollBar = ({ data }) => (
-    <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow} style={{ overflow: 'hidden' }}>
+    <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow} transitionBehavior='smooth' style={{ overflow: 'hidden' }}>
         {data.map((item) => (
             <Box key={item.id} width="910px" itemId={item.id} overflow="hidden" p="1">
                 <Image
